@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.lovable/
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://mayankparmar.com/sitemap.xml

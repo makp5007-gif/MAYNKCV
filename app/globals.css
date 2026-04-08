@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-background: #0d110e;
+  --color-surface: #151a16;
+  --color-surface-hover: #1c231d;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-primary: #2d3b2e;
+  --color-primary-light: #7b957e;
+  --color-secondary: #1e2920;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #ededed;
+  font-family: var(--font-sans);
+}
+
+.glass-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.text-gradient {
+  color: var(--color-primary-light);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
