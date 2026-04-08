@@ -265,10 +265,7 @@ const tools = [
   { name: "ChatGPT", icon: "https://cdn.simpleicons.org/openai/white", fallback: <Bot className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
   { name: "Midjourney", fallback: <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
   { name: "Jasper AI", fallback: <Bot className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "AdCreative.ai", fallback: <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Claude", icon: "https://cdn.simpleicons.org/anthropic/white", fallback: <BrainCircuit className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Synthesia", fallback: <Bot className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Copy.ai", fallback: <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> }
+  { name: "Claude", icon: "https://cdn.simpleicons.org/anthropic/white", fallback: <BrainCircuit className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> }
 ];
 
 export default function Portfolio() {
