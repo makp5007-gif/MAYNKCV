@@ -1,6 +1,5 @@
 import type {Metadata} from 'next';
 import { Inter, Poppins, JetBrains_Mono } from 'next/font/google';
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import './globals.css'; // Global styles
 
 const inter = Inter({
@@ -87,7 +86,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           Mayank Parmar - Performance Marketing Specialist in Dubai, UAE
         </h1>
         {children}
-        <SpeedInsights />
       </body>
     </html>
   );

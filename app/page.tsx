@@ -13,7 +13,14 @@ import {
 import CountUp from 'react-countup';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const BeforeAfterSlider = ({ beforeLabel, beforeValue, afterLabel, afterValue }: any) => {
+interface BeforeAfterSliderProps {
+  beforeLabel: string;
+  beforeValue: string;
+  afterLabel: string;
+  afterValue: string;
+}
+
+const BeforeAfterSlider = ({ beforeLabel, beforeValue, afterLabel, afterValue }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
@@ -57,7 +64,13 @@ const BeforeAfterSlider = ({ beforeLabel, beforeValue, afterLabel, afterValue }:
   );
 };
 
-const ToolIcon = ({ tool }: { tool: any }) => {
+interface ToolProps {
+  name: string;
+  icon?: string;
+  fallback?: React.ReactNode;
+}
+
+const ToolIcon = ({ tool }: { tool: ToolProps }) => {
   const [error, setError] = useState(false);
 
   if (!tool.icon || error) {
@@ -70,6 +83,7 @@ const ToolIcon = ({ tool }: { tool: any }) => {
         src={tool.icon} 
         alt={tool.name} 
         fill
+        sizes="(max-width: 768px) 32px, 48px"
         className="object-contain"
         referrerPolicy="no-referrer"
         onError={() => setError(true)}
@@ -305,7 +319,7 @@ export default function Portfolio() {
       <nav className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center pt-8 px-6 md:px-12 pointer-events-auto">
         <div className="flex items-center gap-8 hidden md:flex">
           {navItems.slice(0, 2).map((item) => (
-            <a key={item.id} href={`#${item.id}`} className="text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors">
+            <a key={item.id} href={`#${item.id}`} className="relative text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary-light hover:after:w-full after:transition-all after:duration-300">
               {item.label}
             </a>
           ))}
@@ -321,11 +335,11 @@ export default function Portfolio() {
         </div>
         <div className="flex items-center gap-8 hidden md:flex">
           {navItems.slice(2, 4).map((item) => (
-            <a key={item.id} href={`#${item.id}`} className="text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors">
+            <a key={item.id} href={`#${item.id}`} className="relative text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary-light hover:after:w-full after:transition-all after:duration-300">
               {item.label}
             </a>
           ))}
-          <a href="#contact" className="text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors">
+          <a href="#contact" className="relative text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary-light hover:after:w-full after:transition-all after:duration-300">
             Contact
           </a>
         </div>
@@ -432,18 +446,10 @@ export default function Portfolio() {
       <section className="py-12 border-b border-white/5 bg-surface/20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-all duration-500">
-            <div className="flex items-center gap-2">
-              <Image src="https://cdn.simpleicons.org/googleads/white" alt="Google Ads" width={24} height={24} className="h-6 w-6 object-contain" referrerPolicy="no-referrer" />
-              <span className="font-semibold text-white/90 tracking-wide text-sm">Google Ads</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Image src="https://cdn.simpleicons.org/meta/white" alt="Meta" width={24} height={24} className="h-6 w-6 object-contain" referrerPolicy="no-referrer" />
-              <span className="font-semibold text-white/90 tracking-wide text-sm">Meta</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Image src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok" width={24} height={24} className="h-6 w-6 object-contain" referrerPolicy="no-referrer" />
-              <span className="font-semibold text-white/90 tracking-wide text-sm">TikTok</span>
-            </div>
+            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">GOOGLE ADS</span>
+            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">META</span>
+            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">TIKTOK</span>
+            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">SNAPCHAT</span>
           </div>
         </div>
       </section>
@@ -542,7 +548,7 @@ export default function Portfolio() {
             </div>
 
             {/* Chart */}
-            <div className="h-[300px] w-full">
+            <div style={{ width: "100%", minWidth: 0, height: 300 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={performanceData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
@@ -661,10 +667,10 @@ export default function Portfolio() {
                 key={study.title}
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.03 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
-                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col"
+                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(123,149,126,0.3)] hover:border-white/10"
               >
                 <div className="p-6 md:p-8 flex-1">
                   <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2 mb-4">
