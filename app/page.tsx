@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import CountUp from 'react-countup';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { performanceData, skills, experience, caseStudies, tools } from '@/lib/data';
 
 interface BeforeAfterSliderProps {
   beforeLabel: string;
@@ -64,223 +65,7 @@ const BeforeAfterSlider = ({ beforeLabel, beforeValue, afterLabel, afterValue }:
   );
 };
 
-interface ToolProps {
-  name: string;
-  icon?: string;
-  fallback?: React.ReactNode;
-}
-
-const ToolIcon = ({ tool }: { tool: ToolProps }) => {
-  const [error, setError] = useState(false);
-
-  if (!tool.icon || error) {
-    return tool.fallback || <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full" />;
-  }
-
-  return (
-    <div className="relative h-10 w-10 md:h-12 md:w-12 opacity-80 group-hover:opacity-100 transition-all duration-300">
-      <Image 
-        src={tool.icon} 
-        alt={tool.name} 
-        fill
-        sizes="(max-width: 768px) 32px, 48px"
-        className="object-contain"
-        referrerPolicy="no-referrer"
-        onError={() => setError(true)}
-      />
-    </div>
-  );
-};
-
 // --- Data ---
-const performanceData = [
-  { name: 'Jan', roas: 2.1, cpl: 45 },
-  { name: 'Feb', roas: 2.5, cpl: 42 },
-  { name: 'Mar', roas: 2.8, cpl: 38 },
-  { name: 'Apr', roas: 3.2, cpl: 35 },
-  { name: 'May', roas: 3.8, cpl: 30 },
-  { name: 'Jun', roas: 4.2, cpl: 28 },
-];
-
-const skills = [
-  {
-    category: "Paid Media",
-    icon: <Target className="w-6 h-6 text-primary" />,
-    items: ["Google Ads (Search, Display, YouTube, PMax)", "Meta Ads", "TikTok Ads"]
-  },
-  {
-    category: "Strategy",
-    icon: <TrendingUp className="w-6 h-6 text-primary" />,
-    items: ["Full Funnel Marketing", "ROAS Optimization", "A/B Testing", "Retargeting"]
-  },
-  {
-    category: "Analytics",
-    icon: <BarChart3 className="w-6 h-6 text-primary" />,
-    items: ["GA4", "GTM", "Conversion Tracking", "UTM Tracking"]
-  },
-  {
-    category: "Creative & AI",
-    icon: <Zap className="w-6 h-6 text-primary" />,
-    items: ["AI Ad Creative Testing", "Landing Page CRO", "Prompt Engineering"]
-  }
-];
-
-const experience = [
-  {
-    company: "Roadtoworld FZ LLC",
-    location: "Dubai, UAE",
-    role: "Performance Marketing Specialist",
-    period: "2022 – Present",
-    achievements: [
-      "Manage AED 20K+ monthly budgets across multiple platforms.",
-      "Execute full funnel strategies driving consistent growth.",
-      "Optimize CPA, CPL, and ROAS for maximum profitability.",
-      "Implement advanced GA4 + GTM tracking systems."
-    ]
-  },
-  {
-    company: "Freelance",
-    location: "India",
-    role: "Digital Marketing Consultant",
-    period: "2017 – 2022",
-    achievements: [
-      "Managed multi-industry campaigns for diverse clients.",
-      "Built high-converting ad funnels from scratch.",
-      "Consistently improved ROAS and reduced CPL by 20% average.",
-      "Consulted on landing page CRO and creative strategy."
-    ]
-  }
-];
-
-const caseStudies = [
-  {
-    title: "UAE Real Estate Lead Gen",
-    industry: "Real Estate",
-    budget: "AED 50K/mo",
-    result: "+120% Leads",
-    cpl: "-35% CPL",
-    strategy: "Google Search + Meta Lead Forms + CRM Integration",
-    description: "Revamped off-plan property campaigns targeting HNWIs. Shifted from broad targeting to intent-based search and lookalike audiences.",
-    beforeLabel: "Previous CPL",
-    beforeValue: "AED 150",
-    beforeWidth: "80%",
-    afterLabel: "New CPL",
-    afterValue: "AED 97",
-    afterWidth: "45%",
-    metrics: [
-      { label: "Conversion Rate", value: "4.2%" },
-      { label: "Lead Quality", value: "High" }
-    ]
-  },
-  {
-    title: "E-commerce Scaling (GCC)",
-    industry: "Retail / E-com",
-    budget: "AED 25K/mo",
-    result: "4.2x ROAS",
-    cpl: "+45% Revenue",
-    strategy: "PMax + Meta Advantage+ + Feed Optimization",
-    description: "Scaled an e-commerce brand across GCC by leveraging Google PMax and Meta Advantage+ shopping campaigns, heavily optimizing the product feed.",
-    beforeLabel: "Previous ROAS",
-    beforeValue: "2.1x",
-    beforeWidth: "40%",
-    afterLabel: "New ROAS",
-    afterValue: "4.2x",
-    afterWidth: "90%",
-    metrics: [
-      { label: "CPA Reduction", value: "32%" },
-      { label: "AOV Increase", value: "+15%" }
-    ]
-  },
-  {
-    title: "B2B SaaS Demo Bookings",
-    industry: "Software",
-    budget: "AED 15K/mo",
-    result: "3x Demos",
-    cpl: "-40% CPA",
-    strategy: "LinkedIn Ads + Google Search + Retargeting",
-    description: "Targeted enterprise decision-makers with gated content leading to demo requests. Optimized LinkedIn lead gen forms and Google intent keywords.",
-    beforeLabel: "Previous CPA",
-    beforeValue: "AED 400",
-    beforeWidth: "85%",
-    afterLabel: "New CPA",
-    afterValue: "AED 240",
-    afterWidth: "50%",
-    metrics: [
-      { label: "Demo Show Rate", value: "75%" },
-      { label: "Pipeline Value", value: "+210%" }
-    ]
-  },
-  {
-    title: "Aesthetic Clinic Footfall",
-    industry: "Healthcare",
-    budget: "AED 20K/mo",
-    result: "+80% Bookings",
-    cpl: "-25% CPL",
-    strategy: "Local SEO + Meta Video Ads + Offer Funnels",
-    description: "Drove local foot traffic to a premium aesthetic clinic in Dubai using highly visual before/after video ads and geo-targeted search campaigns.",
-    beforeLabel: "Previous CPL",
-    beforeValue: "AED 120",
-    beforeWidth: "70%",
-    afterLabel: "New CPL",
-    afterValue: "AED 90",
-    afterWidth: "40%",
-    metrics: [
-      { label: "Show-up Rate", value: "65%" },
-      { label: "Walk-ins", value: "+40%" }
-    ]
-  },
-  {
-    title: "EdTech Student Acquisition",
-    industry: "Education",
-    budget: "AED 40K/mo",
-    result: "2.5x Enrollments",
-    cpl: "-30% CAC",
-    strategy: "YouTube Ads + Meta Lead Gen + Retargeting",
-    description: "Scaled student enrollments for an online certification program. Utilized YouTube video ads for top-of-funnel awareness and Meta lead forms for high-intent capture.",
-    beforeLabel: "Previous CAC",
-    beforeValue: "AED 850",
-    beforeWidth: "85%",
-    afterLabel: "New CAC",
-    afterValue: "AED 590",
-    afterWidth: "55%",
-    metrics: [
-      { label: "Conversion Rate", value: "3.8%" },
-      { label: "Lead to Student", value: "12%" }
-    ]
-  },
-  {
-    title: "FinTech App Installs",
-    industry: "Finance",
-    budget: "AED 60K/mo",
-    result: "+150% Installs",
-    cpl: "-45% CPI",
-    strategy: "Apple Search Ads + Google App Campaigns",
-    description: "Drove high-quality user acquisition for a new personal finance app. Focused on Apple Search Ads for high-intent users and Google UAC for volume.",
-    beforeLabel: "Previous CPI",
-    beforeValue: "AED 45",
-    beforeWidth: "90%",
-    afterLabel: "New CPI",
-    afterValue: "AED 24",
-    afterWidth: "45%",
-    metrics: [
-      { label: "App Rating", value: "4.8/5" },
-      { label: "Retention D7", value: "35%" }
-    ]
-  }
-];
-
-const tools = [
-  { name: "Google Ads", icon: "https://cdn.simpleicons.org/googleads/4285F4", fallback: <Target className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-[#4285F4] transition-colors" /> },
-  { name: "Meta Ads", icon: "https://cdn.simpleicons.org/meta/0668E1", fallback: <Activity className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-[#0668E1] transition-colors" /> },
-  { name: "TikTok Ads", icon: "https://cdn.simpleicons.org/tiktok/white", fallback: <Zap className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "GA4", icon: "https://cdn.simpleicons.org/googleanalytics/E37400", fallback: <BarChart3 className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-[#E37400] transition-colors" /> },
-  { name: "GTM", icon: "https://cdn.simpleicons.org/googletagmanager/246FDB", fallback: <Activity className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-[#246FDB] transition-colors" /> },
-  { name: "Looker Studio", icon: "https://cdn.simpleicons.org/looker/4285F4", fallback: <LineChart className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-[#4285F4] transition-colors" /> },
-  { name: "ChatGPT", icon: "https://cdn.simpleicons.org/openai/white", fallback: <Bot className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Midjourney", fallback: <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Jasper AI", fallback: <Bot className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> },
-  { name: "Claude", icon: "https://cdn.simpleicons.org/anthropic/white", fallback: <BrainCircuit className="w-10 h-10 md:w-12 md:h-12 text-white/50 group-hover:text-white transition-colors" /> }
-];
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
@@ -295,7 +80,7 @@ export default function Portfolio() {
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
-        const element = document.getElementById(section);
+        const element = document.querySelector<HTMLElement>(`#${section}`);
         if (element && scrollPosition >= element.offsetTop && scrollPosition < element.offsetTop + element.offsetHeight) {
           setActiveSection(section);
         }
@@ -324,13 +109,7 @@ export default function Portfolio() {
             </a>
           ))}
         </div>
-        <div 
-          className="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white"
-          style={{ 
-            textShadow: "1px 1px 0 #7b957e, 2px 2px 0 #7b957e, 3px 3px 0 #2d3b2e, 4px 4px 0 #2d3b2e, 5px 5px 0 #1e2920, 6px 6px 0 #1e2920, 8px 8px 15px rgba(0,0,0,0.8)",
-            transform: "rotate(-2deg)"
-          }}
-        >
+        <div className="text-xl md:text-2xl font-bold tracking-widest text-white uppercase">
           MAYANK PARMAR
         </div>
         <div className="flex items-center gap-8 hidden md:flex">
@@ -774,7 +553,7 @@ export default function Portfolio() {
       <section className="py-20 px-4 border-y border-white/5 bg-surface/20">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-xs font-medium text-white/40 uppercase tracking-widest mb-12">Platforms & AI Tools I Master</p>
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-16">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
             {tools.map((tool, index) => (
               <motion.div
                 key={tool.name}
@@ -782,10 +561,9 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group flex flex-col items-center gap-3 cursor-default opacity-60 hover:opacity-100 transition-opacity"
+                className="group flex items-center justify-center px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-default"
               >
-                <ToolIcon tool={tool} />
-                <span className="text-xs font-medium text-white/40 group-hover:text-white/90 transition-colors">{tool.name}</span>
+                <span className="text-sm font-bold tracking-wider text-white/60 group-hover:text-white transition-colors">{tool.name}</span>
               </motion.div>
             ))}
           </div>

@@ -52,34 +52,28 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${poppins.variable} ${jetbrainsMono.variable} scroll-smooth`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Mayank Parmar",
-              "url": "https://mayankparmar.com/",
-              "description": "Performance Marketing Specialist driving predictable revenue."
-            })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Mayank Parmar",
-              "url": "https://mayankparmar.com/",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://mayankparmar.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            })
-          }}
-        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Mayank Parmar",
+            "url": "https://mayankparmar.com/",
+            "description": "Performance Marketing Specialist driving predictable revenue."
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Mayank Parmar",
+            "url": "https://mayankparmar.com/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://mayankparmar.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
       </head>
       <body className="bg-[#0a0a0a] text-[#ededed] font-sans antialiased selection:bg-white/20" suppressHydrationWarning>
         <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: '0' }}>
