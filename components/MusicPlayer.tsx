@@ -9,12 +9,46 @@ export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Using a royalty-free ambient/lofi track as a placeholder.
-    // You can replace this URL with your own audio file path (e.g., '/music.mp3' if you place a file in the public folder).
-    audioRef.current = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3');
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.2; // Set volume to 20% so it's not too loud
+    // Initialize audio only once
+    if (!audioRef.current) {
+      audioRef.current = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.2; // Set volume to 20%
+    }
 
+    const attemptPlay = () => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(error => {
+          console.log("Autoplay prevented by browser. Waiting for user interaction.");
+        });
+      }
+    };
+
+    // Attempt to play immediately on mount
+    attemptPlay();
+
+    // If autoplay is blocked, play on first user interaction
+    const handleInteraction = () => {
+      if (!isPlaying) {
+        attemptPlay();
+      }
+    };
+
+    document.addEventListener('click', handleInteraction);
+    document.addEventListener('scroll', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+
+    return () => {
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('scroll', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+  }, [isPlaying]);
+
+  // Cleanup audio on unmount
+  useEffect(() => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
