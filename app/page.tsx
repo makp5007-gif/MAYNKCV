@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import CountUp from 'react-countup';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { performanceData, skills, experience, caseStudies, tools } from '@/lib/data';
+import { performanceData, skills, experience, caseStudies, tools, clients } from '@/lib/data';
 
 interface BeforeAfterSliderProps {
   beforeLabel: string;
@@ -109,9 +109,24 @@ export default function Portfolio() {
             </a>
           ))}
         </div>
-        <div className="text-xl md:text-2xl font-bold tracking-widest text-white uppercase">
-          MAYANK PARMAR
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white"
+          style={{ 
+            textShadow: "1px 1px 0 #7b957e, 2px 2px 0 #7b957e, 3px 3px 0 #2d3b2e, 4px 4px 0 #2d3b2e, 5px 5px 0 #1e2920, 6px 6px 0 #1e2920, 8px 8px 15px rgba(0,0,0,0.8)",
+            transform: "rotate(-2deg)"
+          }}
+        >
+          <motion.span
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-block"
+          >
+            MAYANK PARMAR
+          </motion.span>
+        </motion.div>
         <div className="flex items-center gap-8 hidden md:flex">
           {navItems.slice(2, 4).map((item) => (
             <a key={item.id} href={`#${item.id}`} className="relative text-xs font-medium text-white/60 hover:text-white uppercase tracking-wider transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary-light hover:after:w-full after:transition-all after:duration-300">
@@ -221,14 +236,26 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="py-12 border-b border-white/5 bg-surface/20">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-all duration-500">
-            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">GOOGLE ADS</span>
-            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">META</span>
-            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">TIKTOK</span>
-            <span className="font-bold text-white/90 tracking-widest text-sm md:text-base uppercase">SNAPCHAT</span>
+      {/* Trust Badges / Client Marquee */}
+      <section className="py-12 border-b border-white/5 bg-surface/20 overflow-hidden relative">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointers-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointers-events-none" />
+        <div className="max-w-7xl mx-auto px-4 flex justify-center flex-col items-center">
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-[0.2em] mb-8 text-center">Trusted By Ambitious Brands</p>
+          <div className="relative w-full flex overflow-hidden">
+            <motion.div
+              animate={{ x: [0, -1000] }}
+              transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+              className="flex whitespace-nowrap gap-16 md:gap-24 items-center pr-16 md:pr-24"
+            >
+              {/* Double sequence for seamless loop */}
+              {[...clients, ...clients, ...clients].map((client, idx) => (
+                <div key={idx} className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                  {client.icon}
+                  <span className="font-bold text-white/80 tracking-widest text-lg uppercase">{client.name}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -440,16 +467,15 @@ export default function Portfolio() {
             <p className="text-white/50 max-w-2xl mx-auto">Real campaigns. Real numbers. Here is how I&apos;ve helped businesses scale profitably across diverse industries.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="columns-1 md:columns-2 gap-8 space-y-8">
             {caseStudies.map((study, index) => (
               <motion.div
                 key={study.title}
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                whileHover={{ y: -8, scale: 1.03 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, type: "spring", stiffness: 400, damping: 25, delay: index * 0.1 } }}
+                whileHover={{ y: -12, scale: 1.03, transition: { duration: 0.3, type: "spring", stiffness: 400, damping: 25, delay: 0 } }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
-                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(123,149,126,0.3)] hover:border-white/10"
+                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(123,149,126,0.4)] hover:border-white/20 hover:bg-surface/80 relative z-10 hover:z-20 break-inside-avoid"
               >
                 <div className="p-6 md:p-8 flex-1">
                   <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2 mb-4">
@@ -550,23 +576,33 @@ export default function Portfolio() {
       </section>
 
       {/* Tools & Platforms */}
-      <section className="py-20 px-4 border-y border-white/5 bg-surface/20">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-xs font-medium text-white/40 uppercase tracking-widest mb-12">Platforms & AI Tools I Master</p>
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
-            {tools.map((tool, index) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="group flex items-center justify-center px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-default"
+      <section className="py-20 border-y border-white/5 bg-surface/20 overflow-hidden">
+        <div className="text-center mb-12">
+          <p className="text-xs font-medium text-white/40 uppercase tracking-widest">Platforms & AI Tools I Master</p>
+        </div>
+        <div className="relative flex w-full">
+          {/* Gradient Masks for smooth fade on edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface/20 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface/20 to-transparent z-10 pointer-events-none" />
+          
+          <motion.div
+            className="flex whitespace-nowrap gap-4 md:gap-8 px-4"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              ease: "linear",
+              duration: 80,
+            }}
+          >
+            {[...tools, ...tools, ...tools, ...tools].map((tool, index) => (
+              <div
+                key={`${tool.name}-${index}`}
+                className="group flex items-center justify-center px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-default shrink-0"
               >
                 <span className="text-sm font-bold tracking-wider text-white/60 group-hover:text-white transition-colors">{tool.name}</span>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

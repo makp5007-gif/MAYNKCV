@@ -1,5 +1,18 @@
+'use client';
+
 import React from 'react';
-import { Target, TrendingUp, BarChart3, Zap, Activity, LineChart, Bot, Sparkles, BrainCircuit } from 'lucide-react';
+import { Target, TrendingUp, BarChart3, Zap, Activity, LineChart, Bot, Sparkles, BrainCircuit, MousePointerClick, Waypoints, PieChart, Building2, ShoppingBag, Landmark, Home, Stethoscope, GraduationCap, Cloud } from 'lucide-react';
+import { motion } from 'motion/react';
+
+export const clients = [
+  { name: "Apex Properties", icon: <Home className="w-6 h-6 text-white/40" /> },
+  { name: "Velocity E-Com", icon: <ShoppingBag className="w-6 h-6 text-white/40" /> },
+  { name: "FinCore", icon: <Landmark className="w-6 h-6 text-white/40" /> },
+  { name: "Lumière Clinics", icon: <Stethoscope className="w-6 h-6 text-white/40" /> },
+  { name: "TechFlow SaaS", icon: <Cloud className="w-6 h-6 text-white/40" /> },
+  { name: "EduSmart", icon: <GraduationCap className="w-6 h-6 text-white/40" /> },
+  { name: "Roadtoworld LLC", icon: <Building2 className="w-6 h-6 text-white/40" /> }
+];
 
 export const performanceData = [
   { name: 'Jan', roas: 2.1, cpl: 45 },
@@ -13,22 +26,50 @@ export const performanceData = [
 export const skills = [
   {
     category: "Paid Media",
-    icon: <Target className="w-6 h-6 text-primary" />,
+    icon: (
+      <motion.div
+        animate={{ scale: [1, 0.85, 1], y: [0, 2, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <MousePointerClick className="w-6 h-6 text-primary" />
+      </motion.div>
+    ),
     items: ["Google Ads (Search, Display, YouTube, PMax)", "Meta Ads", "TikTok Ads"]
   },
   {
     category: "Strategy",
-    icon: <TrendingUp className="w-6 h-6 text-primary" />,
+    icon: (
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6], scale: [0.95, 1.05, 0.95] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Waypoints className="w-6 h-6 text-primary" />
+      </motion.div>
+    ),
     items: ["Full Funnel Marketing", "ROAS Optimization", "A/B Testing", "Retargeting"]
   },
   {
     category: "Analytics",
-    icon: <BarChart3 className="w-6 h-6 text-primary" />,
+    icon: (
+      <motion.div
+        animate={{ rotate: [0, 15, -5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <PieChart className="w-6 h-6 text-primary" />
+      </motion.div>
+    ),
     items: ["GA4", "GTM", "Conversion Tracking", "UTM Tracking"]
   },
   {
     category: "Creative & AI",
-    icon: <Zap className="w-6 h-6 text-primary" />,
+    icon: (
+      <motion.div
+        animate={{ y: [0, -4, 0], filter: ['brightness(1)', 'brightness(1.5)', 'brightness(1)'] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <BrainCircuit className="w-6 h-6 text-primary" />
+      </motion.div>
+    ),
     items: ["AI Ad Creative Testing", "Landing Page CRO", "Prompt Engineering"]
   }
 ];
