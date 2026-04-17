@@ -1,7 +1,6 @@
 import type {Metadata} from 'next';
 import { Inter, Poppins, JetBrains_Mono } from 'next/font/google';
 import './globals.css'; // Global styles
-import MusicPlayer from '@/components/MusicPlayer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -81,7 +80,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           Mayank Parmar - Performance Marketing Specialist in Dubai, UAE
         </h1>
         {children}
-        <MusicPlayer />
       </body>
     </html>
   );

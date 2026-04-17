@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { 
-  ArrowRight, BarChart3, Target, TrendingUp, 
+  ArrowRight, 
   Mail, Linkedin, MessageCircle,
-  CheckCircle2, ChevronRight, Zap,
-  LineChart, Activity, Bot, Sparkles, BrainCircuit,
+  CheckCircle2, ChevronRight,
+  Sparkles,
   Menu, X
 } from 'lucide-react';
 import CountUp from 'react-countup';
@@ -68,28 +68,7 @@ const BeforeAfterSlider = ({ beforeLabel, beforeValue, afterLabel, afterValue }:
 // --- Data ---
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'metrics', 'about', 'skills', 'experience', 'work', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.querySelector<HTMLElement>(`#${section}`);
-        if (element && scrollPosition >= element.offsetTop && scrollPosition < element.offsetTop + element.offsetHeight) {
-          setActiveSection(section);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -467,7 +446,7 @@ export default function Portfolio() {
             <p className="text-white/50 max-w-2xl mx-auto">Real campaigns. Real numbers. Here is how I&apos;ve helped businesses scale profitably across diverse industries.</p>
           </div>
 
-          <div className="columns-1 md:columns-2 gap-8 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map((study, index) => (
               <motion.div
                 key={study.title}
@@ -475,7 +454,7 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, type: "spring", stiffness: 400, damping: 25, delay: index * 0.1 } }}
                 whileHover={{ y: -12, scale: 1.03, transition: { duration: 0.3, type: "spring", stiffness: 400, damping: 25, delay: 0 } }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(123,149,126,0.4)] hover:border-white/20 hover:bg-surface/80 relative z-10 hover:z-20 break-inside-avoid"
+                className="glass-card rounded-3xl overflow-hidden border border-white/5 bg-surface/50 group flex flex-col transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(123,149,126,0.4)] hover:border-white/20 hover:bg-surface/80 relative z-10 hover:z-20 h-full"
               >
                 <div className="p-6 md:p-8 flex-1">
                   <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2 mb-4">
